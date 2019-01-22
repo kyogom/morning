@@ -1,0 +1,25 @@
+[debug] [2019-01-22T21:28:13.264Z] ----------------------------------------------------------------------
+[debug] [2019-01-22T21:28:13.268Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-01-22T21:28:13.268Z] CLI Version:   6.3.0
+[debug] [2019-01-22T21:28:13.269Z] Platform:      darwin
+[debug] [2019-01-22T21:28:13.269Z] Node Version:  v8.10.0
+[debug] [2019-01-22T21:28:13.270Z] Time:          Wed Jan 23 2019 06:28:13 GMT+0900 (JST)
+[debug] [2019-01-22T21:28:13.270Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-01-22T21:28:13.289Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-01-22T21:28:13.290Z] > authorizing via signed-in user
+[debug] [2019-01-22T21:28:13.290Z] [iam] checking project morning-40d4c for permissions ["firebase.projects.get"]
+[debug] [2019-01-22T21:28:13.293Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/morning-40d4c:testIamPermissions  
+
+[debug] [2019-01-22T21:28:14.181Z] <<< HTTP RESPONSE 200
+[debug] [2019-01-22T21:28:14.185Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/morning-40d4c  
+ 
+[debug] [2019-01-22T21:28:15.132Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/kyogomochida/morning'...
+[info] 
+[debug] [2019-01-22T21:28:15.136Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/134509653963/clients/_:getWebAppConfig  
+ 
+[debug] [2019-01-22T21:28:16.084Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
