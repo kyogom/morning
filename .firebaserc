@@ -1,1 +1,5 @@
-{}
+{
+  "projects": {
+    "default": "morning-40d4c"
+  }
+}
