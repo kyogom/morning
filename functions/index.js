@@ -1,6 +1,8 @@
 const express = require('express');
 const functions = require('firebase-functions');
 const cors = require('cors');
+const service = require('./service').service;
+const morning = require('./model').morning;
 
 const app = express();
 app.use(cors({ origin: true }));
@@ -10,6 +12,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/helloWorld', (req, res) => res.send('hello'));
+app.get('/morning', async (req, res) => res.send(await morning.getMorningRecord(req, res)));
 
 exports.api = functions.https.onRequest(app);
