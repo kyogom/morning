@@ -8,6 +8,13 @@ var tsToDate = (ts) => {
         new Date(ts * 1000).getDate();
 };
 
+var TsToTimePassMinFrom0400 = (ts) => {
+    const messageDay = new Date(Number(ts * 1000));
+    const messageDay0000ts = new Date(messageDay.getFullYear(), messageDay.getMonth(), messageDay.getDate(), 4).getTime();
+    console.log(new Date(messageDay0000ts));
+    return parseInt((ts * 1000 - messageDay0000ts) / 1000 / 60);
+};
+
 exports.morning = {
     getMorningRecord: function (req, res) {
 
@@ -29,7 +36,8 @@ exports.morning = {
                     'realName': memberInfo.real_name,
                     'image24': memberInfo.profile.image_24,
                     'text': message.text,
-                    'MinutesCountFrom0400': tsToDate(message.ts)
+                    'minutesCountFrom0400': TsToTimePassMinFrom0400(message.ts),
+                    'date': tsToDate(message.ts)
                 });
             });
             return records;
