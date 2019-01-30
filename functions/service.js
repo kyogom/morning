@@ -1,4 +1,5 @@
 var rp = require('request-promise');
+var slackApiToken = require('./token');
 
 exports.service = {
     'getMessages': (req, res) => {
@@ -8,7 +9,7 @@ exports.service = {
         var options = {
             uri: 'https://slack.com/api/channels.history',
             qs: {
-                token: 'xoxp-387063691526-476134818017-528168330805-d3ab1a2d79be048fc957ef7b88fcfc83',
+                token: slackApiToken,
                 channel: 'CDCNR3LUU',
                 count: '1000',
                 latest: twoWeeksAgoTs
@@ -33,7 +34,7 @@ exports.service = {
         var options = {
             uri: 'https://slack.com/api/users.list',
             qs: {
-                token: 'xoxp-387063691526-476134818017-528168330805-d3ab1a2d79be048fc957ef7b88fcfc83',
+                token: slackApiToken,
             },
             headers: {
                 'User-Agent': 'Request-Promise'
