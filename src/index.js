@@ -18,9 +18,6 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root'));
 
-// axios.get('http://localhost:5000/morning-40d4c/us-central1/api/morning')
-//     .then(response => console.log(response));
-
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA

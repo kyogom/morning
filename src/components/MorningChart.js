@@ -4,8 +4,6 @@ class MorningChart extends Component {
 
     componentDidMount() {
         this.props.getChart();
-        // const { dispatch } = this.props
-        // dispatch(this.propsfetchProject())
     }
     render() {
         console.log(this.props.data);
