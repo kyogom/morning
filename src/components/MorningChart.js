@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
+import { dataHardcoded } from './dataHardcoded.ts';
+import { drawChart } from './drawChart.ts';
 
 
 class MorningChart extends Component {
 
     componentDidMount() {
         this.props.getChart();
+        drawChart(dataHardcoded, 'Price, €', 500, '%Y%m%d');
     }
     render() {
         return (
-            <div>
-                hello
-            </div>
+            <svg id="chart"></svg>
         );
     }
 }
