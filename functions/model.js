@@ -8,6 +8,9 @@ var tsToDate = (ts) => {
         new Date(ts * 1000).getDate();
 };
 
+// 4:00から4時間を早起きの時間と定義
+var MORNING_HOUR = 4;
+
 var TsToTimePassMinFrom0400 = (ts) => {
     const messageDay = new Date(Number(ts * 1000));
     const messageDay0000ts = new Date(messageDay.getFullYear(), messageDay.getMonth(), messageDay.getDate(), 4).getTime();
@@ -39,7 +42,8 @@ exports.morning = {
                     'date': tsToDate(message.ts)
                 });
             });
-            return records;
+
+            return records.filter((r) => r.minutesCountFrom0400 <= MORNING_HOUR * 60 && r.minutesCountFrom0400 > 0);
         })();
     }
 
