@@ -1,13 +1,18 @@
 import * as d3 from 'd3';
 import { ScaleTime, ScaleLinear, ScaleOrdinal, Line, Selection, DSVRowString, Axis } from 'd3';
 
-export const drawChart = (data, legendAxisY, heightUser, dateFormat) => {
+export const drawChart = (data, heightUser, dateFormat) => {
 
     // Data
     const fields: any = Object.keys(data[0]);
+    console.log(fields);
+
     const objKey = fields[0];
     const objX = fields[1];
     const objY = fields[2];
+
+    // const objX = fields[5];
+    // const objY = fields[4];
 
     const dataGroup: any = d3.nest().key((d) => d[objKey]).entries(data);
 
@@ -52,7 +57,6 @@ export const drawChart = (data, legendAxisY, heightUser, dateFormat) => {
         .attr("transform", "rotate(-90)")
         .attr("fill", "#000")
         .attr("y", 10)
-        .text(legendAxisY); // Text column Y
 
     dataGroup.forEach((d, i) => {
         svg.append('svg:path')
@@ -78,7 +82,7 @@ export const drawChart = (data, legendAxisY, heightUser, dateFormat) => {
             .attr("cy", (d) => yScale(d[objY]))
             .on("mouseover", (d) => {
                 div.style("opacity", 0.8);
-                div.html("<b>Date: </b>" + parseTime(d[objX]) + "<br/><b>" + legendAxisY + ":</b> " + d[objY])
+                div.html("<b>Date: </b>" + parseTime(d[objX]))
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
             })
@@ -116,7 +120,7 @@ export const drawChart = (data, legendAxisY, heightUser, dateFormat) => {
                 .attr("cy", (d) => yScale(d[objY]))
                 .on("mouseover", (d) => {
                     div.style("opacity", .8);
-                    div.html("<b>Date: </b>" + parseTime(d[objX]) + "<br/><b>" + legendAxisY + ":</b> " + d[objY])
+                    div.html("<b>Date: </b>" + parseTime(d[objX]))
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })

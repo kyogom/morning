@@ -7,7 +7,10 @@ class MorningChart extends Component {
 
     componentDidMount() {
         this.props.getChart();
-        drawChart(dataHardcoded, 'Price, €', 500, '%Y%m%d');
+    }
+    componentDidUpdate() {
+        console.log(this.props.data);
+        drawChart(dataHardcoded, 500, '%Y%m%d');
     }
     render() {
         return (
