@@ -5,14 +5,10 @@ export const drawChart = (data, heightUser, dateFormat) => {
 
     // Data
     const fields: any = Object.keys(data[0]);
-    console.log(fields);
 
     const objKey = fields[0];
-    const objX = fields[1];
-    const objY = fields[2];
-
-    // const objX = fields[5];
-    // const objY = fields[4];
+    const objX = fields[5];
+    const objY = fields[4];
 
     const dataGroup: any = d3.nest().key((d) => d[objKey]).entries(data);
 
