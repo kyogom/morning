@@ -8,7 +8,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -40,6 +40,10 @@
   shape-rendering: crispEdges;
 }
 
+.scale {
+    color: black;
+}
+
 .y {
     color:white;
 }
@@ -65,4 +69,11 @@ div.tooltip {
   border: 0px;
   border-radius: 8px;
   pointer-events: none;
+}
+
+.circle {
+    fill: black;
+    stroke: #fff;
+    opacity: 1;
+    r: 3;
 }

@@ -41,12 +41,12 @@ export const drawChart = (data, heightUser, dateFormat) => {
         .style("opacity", 0);
 
     svg.append("svg:g")
-        .attr("class", "x axis")
+        .attr("class", "scale")
         .attr("transform", "translate(0," + (height - margins.bottom) + ")")
         .call(xAxis) // Drawing axis X
 
     svg.append("svg:g")
-        .attr("class", "y axis")
+        .attr("class", "scale")
         .attr("transform", "translate(" + (margins.left) + ",0)")
         .call(yAxis) // Drawing axis Y
         .append("text")
