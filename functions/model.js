@@ -1,11 +1,9 @@
 const service = require('./service').service;
 
 var tsToDate = (ts) => {
-    return new Date(ts * 1000).getFullYear()
-        + '-' +
-        (new Date(ts * 1000).getMonth() + 1)
-        + '-' +
-        new Date(ts * 1000).getDate();
+    return new Date(new Date(ts * 1000).getFullYear(),
+        (new Date(ts * 1000).getMonth() + 1),
+        new Date(ts * 1000).getDate());
 };
 
 // 4:00から4時間を早起きの時間と定義
