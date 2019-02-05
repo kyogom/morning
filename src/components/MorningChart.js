@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { dataHardcoded } from './dataHardcoded.ts';
 import { drawChart } from './drawChart.ts';
 
 
