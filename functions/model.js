@@ -2,7 +2,7 @@ const service = require('./service').service;
 
 var tsToDate = (ts) => {
     return new Date(new Date(ts * 1000).getFullYear(),
-        (new Date(ts * 1000).getMonth() + 1),
+        (new Date(ts * 1000).getMonth()),
         new Date(ts * 1000).getDate());
 };
 
@@ -41,7 +41,8 @@ exports.morning = {
                 });
             });
 
-            return records.filter((r) => r.minutesCountFrom0400 <= MORNING_HOUR * 60 && r.minutesCountFrom0400 > 0);
+            const timeFiltered = records.filter((r) => r.minutesCountFrom0400 <= MORNING_HOUR * 60 && r.minutesCountFrom0400 > 0);
+            return timeFiltered;
         })();
     }
 
