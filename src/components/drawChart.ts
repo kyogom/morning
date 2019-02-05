@@ -65,7 +65,7 @@ export const drawChart = (data, heightUser, dateFormat) => {
             .attr("class", "textKey" + i)
             .attr("transform", "translate(" + xScale(d.values[d.values.length - 1][objX]) + "," + yScale(d.values[d.values.length - 1][objY]) + ")")
             .style("font", "10px sans-serif")
-            .text(d.key); // Showing data keys
+            .text(data.filter((data) => data.user === d.key)[0].realName); // Showing data keys
 
         // Add the scatterplot
         svg.selectAll("dot")
