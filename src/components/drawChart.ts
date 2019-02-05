@@ -4,11 +4,9 @@ import { ScaleTime, ScaleLinear, ScaleOrdinal, Line, Selection, DSVRowString, Ax
 export const drawChart = (data, heightUser, dateFormat) => {
 
     // Data
-    const fields: any = Object.keys(data[0]);
-
-    const objKey = fields[0];
-    const objX = fields[5];
-    const objY = fields[4];
+    const objKey = 'user';
+    const objY = 'minutesCountFrom0400';
+    const objX = 'date';
 
     const dataGroup: any = d3.nest().key((d) => d[objKey]).entries(data);
 
@@ -65,7 +63,14 @@ export const drawChart = (data, heightUser, dateFormat) => {
             .attr("class", "textKey" + i)
             .attr("transform", "translate(" + xScale(d.values[d.values.length - 1][objX]) + "," + yScale(d.values[d.values.length - 1][objY]) + ")")
             .style("font", "10px sans-serif")
-            .text(data.filter((data) => data.user === d.key)[0].realName); // Showing data keys
+            .text(
+                () => {
+                    const user = data.filter((data) => data.user === d.key);
+                    if (user.length === 0) {
+                        return d.key;
+                    }
+                    return user[0].realName;
+                }); // Showing data keys
 
         // Add the scatterplot
         svg.selectAll("dot")
@@ -115,8 +120,8 @@ export const drawChart = (data, heightUser, dateFormat) => {
                 .attr("cx", (d) => xScale(d[objX]))
                 .attr("cy", (d) => yScale(d[objY]))
                 .on("mouseover", (d) => {
-                    div.style("opacity", .8);
-                    div.html("<b>Date: </b>" + parseTime(d[objX]))
+                    div.style("opacity", .9);
+                    div.html(d.realName + ":" + d.text)
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })
