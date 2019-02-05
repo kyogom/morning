@@ -26,7 +26,7 @@ export const drawChart = (data, heightUser, dateFormat) => {
     xScale.domain(d3.extent(data, (d) => +d[objX]));
     yScale.domain(d3.extent(data, (d) => +d[objY]));
     xScale.range([margins.left, width]);
-    yScale.range([height - margins.bottom, margins.top]);
+    yScale.range([margins.top, height - margins.bottom]);
     const xAxis: Axis<{}> = d3.axisBottom(xScale);
     const yAxis: Axis<{}> = d3.axisLeft(yScale);
 
@@ -94,7 +94,7 @@ export const drawChart = (data, heightUser, dateFormat) => {
 
         // Update the range of the scale with new width/height
         xScale.range([margins.left, width]);
-        yScale.range([height - margins.bottom, margins.top]);
+        yScale.range([margins.top, height - margins.bottom]);
 
         // Update the axis and text with the new scale
         svg.select('.x.axis')
