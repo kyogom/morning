@@ -7,6 +7,15 @@
   height: 40vmin;
 }
 
+.blur {
+    opacity: 0.1;
+ }
+
+
+.visible {
+   opacity: 1;
+}
+
 .App-header {
   background-color: white;
   min-height: 100vh;

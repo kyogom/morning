@@ -58,13 +58,20 @@ export const drawChart = (data, heightUser) => {
         .attr("fill", "#000")
         .attr("y", 10)
 
-    dataGroup.forEach((d, i) => {
+    dataGroup.forEach((d, i, n) => {
         svg.append('svg:path')
             .attr("class", "line" + i)
             .attr('d', lineGen(d.values)) // Drawing line
             .attr('stroke', (d, j) => "hsl(" + i * 50 % 360 + ",100%,50%)")  // Setting color
-            .attr('stroke-width', 2)
-            .attr('fill', 'none');
+            .attr('stroke-width', 3)
+            .attr('class', 'blur')
+            .attr('fill', 'none')
+            .on("mouseover", function (this: any) {
+                d3.select(this).attr("class", "visible")
+            })
+            .on("mouseout", function (this: any) {
+                d3.select(this).attr("class", "blur")
+            })
         svg.append('svg:text')
             .attr("class", "textKey" + i)
             .attr("transform", "translate(" + xScale(d.values[d.values.length - 1][objX]) + "," + yScale(d.values[d.values.length - 1][objY]) + ")")
@@ -93,9 +100,9 @@ export const drawChart = (data, heightUser) => {
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
             })
-        // .on("mouseout", (d) => {
-        //     div.style("opacity", 0);
-        // });
+            .on("mouseout", (d) => {
+                div.style("opacity", 0);
+            });
     });
 
     // Responsive behavior
@@ -125,15 +132,15 @@ export const drawChart = (data, heightUser) => {
             svg.selectAll(".circle")
                 .attr("cx", (d) => xScale(d[objX]))
                 .attr("cy", (d) => yScale(d[objY]))
-                .on("mouseover", (d) => {
+                .on("mouseover", function (this: any, d) {
                     div.style("opacity", 1);
                     div.html("<img src=\"" + d.image24 + "\">" + parseTime(d.msPass) + ":" + d.realName + ":" + d.text)
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })
-            // .on("mouseout", (d) => {
-            //     div.style("opacity", 0);
-            // });
+                .on("mouseout", (d) => {
+                    div.style("opacity", 0);
+                });
         });
 
         // Update the tick marks
