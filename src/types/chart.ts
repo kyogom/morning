@@ -2,7 +2,7 @@ export type Chart = {
     user: string;
     realName: string;
     image24: string;
-    minutesCountFrom0400: number;
+    msPass: number;
     date: string;
 };
 

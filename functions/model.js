@@ -6,13 +6,14 @@ var tsToDate = (ts) => {
         new Date(ts * 1000).getDate());
 };
 
-// 4:00から4時間を早起きの時間と定義
-var MORNING_HOUR = 4;
+// 4:00から8:00を早起きの時間と定義
+var MORNING_HOUR_START = 4;
+var MORNING_HOUR_END = 8;
+var JP_TIME_ZONE = 9;
 
-var TsToTimePassMinFrom0400 = (ts) => {
-    const messageDay = new Date(Number(ts * 1000));
-    const messageDay0000ts = new Date(messageDay.getFullYear(), messageDay.getMonth(), messageDay.getDate(), 4).getTime();
-    return parseInt((ts * 1000 - messageDay0000ts) / 1000 / 60);
+var TsToMilliSecondPassFrom0000 = (ts) => {
+    let milliSecondPassFrom0000 = ts % (24 * 60 * 60 * 1000);
+    return parseInt(milliSecondPassFrom0000);
 };
 
 exports.morning = {
@@ -36,12 +37,16 @@ exports.morning = {
                     'realName': memberInfo.real_name,
                     'image24': memberInfo.profile.image_24,
                     'text': message.text,
-                    'minutesCountFrom0400': TsToTimePassMinFrom0400(message.ts),
+                    'msPass': TsToMilliSecondPassFrom0000(message.ts * 1000),
                     'date': tsToDate(message.ts)
                 });
             });
 
-            const timeFiltered = records.filter((r) => r.minutesCountFrom0400 <= MORNING_HOUR * 60 && r.minutesCountFrom0400 > 0);
+            const timeFiltered = records.filter((r) =>
+                (MORNING_HOUR_START + 24 - JP_TIME_ZONE) * 60 * 60 * 1000 <= r.msPass
+                &&
+                r.msPass <= (MORNING_HOUR_END + 24 - JP_TIME_ZONE) * 60 * 60 * 1000
+            );
             return timeFiltered;
         })();
     }
