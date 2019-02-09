@@ -60,20 +60,20 @@
 
 div.tooltip {
   position: absolute;
+  display: table;
   text-align: center;
   width: 120px;
   height: 34px;
-  padding: 2px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: bisque;
   font: 12px sans-serif;
-  background: lightsteelblue;
   border: 0px;
-  border-radius: 8px;
   pointer-events: none;
 }
 
 .circle {
-    fill: black;
-    stroke: #fff;
+    fill: darkcyan;
     opacity: 1;
-    r: 3;
+    r: 4;
 }

@@ -1,14 +1,19 @@
 import * as d3 from 'd3';
 import { ScaleTime, ScaleLinear, ScaleOrdinal, Line, Selection, DSVRowString, Axis } from 'd3';
+import reducers from '../reducers';
 
-export const drawChart = (data, heightUser, dateFormat) => {
+export const drawChart = (data, heightUser) => {
 
     // Data
     const objKey = 'user';
-    const objY = 'minutesCountFrom0400';
+    const objY = 'msPass';
     const objX = 'date';
 
     const dataGroup: any = d3.nest().key((d) => d[objKey]).entries(data);
+
+    // format
+    const dateFormat = '%Y%m%d';
+    const timeFormat = '%H:%M';
 
     // Margins
     const margins = { top: 20, right: 80, bottom: 30, left: 50 };
@@ -20,7 +25,7 @@ export const drawChart = (data, heightUser, dateFormat) => {
 
     // Scales, domain and axis
     const xScale: ScaleTime<number, number> = d3.scaleTime();
-    const yScale: ScaleLinear<number, number> = d3.scaleLinear();
+    const yScale: ScaleTime<number, number> = d3.scaleTime();
     xScale.domain(d3.extent(data, (d) => +d[objX]));
     yScale.domain(d3.extent(data, (d) => +d[objY]));
     xScale.range([margins.left, width]);
@@ -28,7 +33,8 @@ export const drawChart = (data, heightUser, dateFormat) => {
     const xAxis: Axis<{}> = d3.axisBottom(xScale);
     const yAxis: Axis<{}> = d3.axisLeft(yScale);
 
-    const parseTime = d3.timeFormat(dateFormat);
+    const parseDate = d3.timeFormat(dateFormat);
+    const parseTime = d3.timeFormat(timeFormat);
 
     // Lines
     const lineGen: Line<[number, number]> = d3.line().x((d) => xScale(d[objX])).y((d) => yScale(d[objY]));
@@ -62,7 +68,7 @@ export const drawChart = (data, heightUser, dateFormat) => {
         svg.append('svg:text')
             .attr("class", "textKey" + i)
             .attr("transform", "translate(" + xScale(d.values[d.values.length - 1][objX]) + "," + yScale(d.values[d.values.length - 1][objY]) + ")")
-            .style("font", "10px sans-serif")
+            .style("font", "12px sans-serif")
             .text(
                 () => {
                     const user = data.filter((data) => data.user === d.key);
@@ -82,14 +88,14 @@ export const drawChart = (data, heightUser, dateFormat) => {
             .attr("cx", (d) => xScale(d[objX]))
             .attr("cy", (d) => yScale(d[objY]))
             .on("mouseover", (d) => {
-                div.style("opacity", 0.8);
-                div.html("<b>Date: </b>" + parseTime(d[objX]))
+                div.style("opacity", 1);
+                div.html("<b>Date: </b>" + parseDate(d[objX]))
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
             })
-            .on("mouseout", (d) => {
-                div.style("opacity", 0);
-            });
+        // .on("mouseout", (d) => {
+        //     div.style("opacity", 0);
+        // });
     });
 
     // Responsive behavior
@@ -120,14 +126,14 @@ export const drawChart = (data, heightUser, dateFormat) => {
                 .attr("cx", (d) => xScale(d[objX]))
                 .attr("cy", (d) => yScale(d[objY]))
                 .on("mouseover", (d) => {
-                    div.style("opacity", .9);
-                    div.html(d.realName + ":" + d.text)
+                    div.style("opacity", 1);
+                    div.html("<img src=\"" + d.image24 + "\">" + parseTime(d.msPass) + ":" + d.realName + ":" + d.text)
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })
-                .on("mouseout", (d) => {
-                    div.style("opacity", 0);
-                });
+            // .on("mouseout", (d) => {
+            //     div.style("opacity", 0);
+            // });
         });
 
         // Update the tick marks
