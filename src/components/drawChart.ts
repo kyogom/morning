@@ -63,7 +63,7 @@ export const drawChart = (data, heightUser) => {
             .attr("class", "line" + i)
             .attr('d', lineGen(d.values)) // Drawing line
             .attr('stroke', (d, j) => "hsl(" + i * 50 % 360 + ",100%,50%)")  // Setting color
-            .attr('stroke-width', 3)
+            .attr('stroke-width', 5)
             .attr('class', 'blur')
             .attr('fill', 'none')
             .on("mouseover", function (this: any) {
@@ -72,9 +72,12 @@ export const drawChart = (data, heightUser) => {
             .on("mouseout", function (this: any) {
                 d3.select(this).attr("class", "blur")
             })
+
+        const marginLeft = 5;
+        const marginTop = 3;
         svg.append('svg:text')
             .attr("class", "textKey" + i)
-            .attr("transform", "translate(" + xScale(d.values[d.values.length - 1][objX]) + "," + yScale(d.values[d.values.length - 1][objY]) + ")")
+            .attr("transform", "translate(" + (xScale(d.values[0][objX]) + marginLeft) + "," + (yScale(d.values[0][objY]) + marginTop) + ")")
             .style("font", "12px sans-serif")
             .text(
                 () => {
@@ -83,7 +86,7 @@ export const drawChart = (data, heightUser) => {
                         return d.key;
                     }
                     return user[0].realName;
-                }); // Showing data keys
+                });
 
         // Add the scatterplot
         svg.selectAll("dot")
@@ -94,6 +97,7 @@ export const drawChart = (data, heightUser) => {
             .attr("opacity", 0)
             .attr("cx", (d) => xScale(d[objX]))
             .attr("cy", (d) => yScale(d[objY]))
+            .style('fill', (d, j) => "hsl(" + i * 50 % 360 + ",100%,50%)")  // Setting color
             .on("mouseover", function (this: any, d) {
                 div.style("opacity", 1);
                 div.html("<img src=\"" + d.image24 + "\">" + parseTime(d.msPass) + ":" + d.realName + ":" + d.text)

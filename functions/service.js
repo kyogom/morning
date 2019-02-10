@@ -5,7 +5,7 @@ exports.service = {
     'getMessages': (req, res) => {
         const today = new Date();
         const today0000 = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-        const twoWeeksAgoTs = today0000.getTime() - 1000 * 60 * 60 * 24 * 14;
+        const fourWeeksAgoTs = today0000.getTime() - 1000 * 60 * 60 * 24 * 28;
         var options = {
             uri: 'https://slack.com/api/channels.history',
             qs: {
@@ -13,7 +13,7 @@ exports.service = {
                 channel: 'CDCNR3LUU',
                 count: '1000',
                 // Slack Api Handle Timestamp not millisecond but second
-                oldest: twoWeeksAgoTs / 1000
+                oldest: fourWeeksAgoTs / 1000
             },
             headers: {
                 'User-Agent': 'Request-Promise'
