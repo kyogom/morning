@@ -94,9 +94,9 @@ export const drawChart = (data, heightUser) => {
             .attr("opacity", 0)
             .attr("cx", (d) => xScale(d[objX]))
             .attr("cy", (d) => yScale(d[objY]))
-            .on("mouseover", (d) => {
+            .on("mouseover", function (this: any, d) {
                 div.style("opacity", 1);
-                div.html("<b>Date: </b>" + parseDate(d[objX]))
+                div.html("<img src=\"" + d.image24 + "\">" + parseTime(d.msPass) + ":" + d.realName + ":" + d.text)
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
             })
@@ -104,54 +104,4 @@ export const drawChart = (data, heightUser) => {
                 div.style("opacity", 0);
             });
     });
-
-    // Responsive behavior
-    function resize() {
-        width = parseInt(d3.select("#chart").style("width")) - margins.left - margins.right;
-        height = heightUser - margins.top - margins.bottom;
-
-        // Update the range of the scale with new width/height
-        xScale.range([margins.left, width]);
-        yScale.range([margins.top, height - margins.bottom]);
-
-        // Update the axis and text with the new scale
-        svg.select('.x.axis')
-            .attr("transform", "translate(0," + (height - margins.bottom) + ")")
-            .call(xAxis);
-        svg.select('.y.axis')
-            .call(yAxis);
-
-        // Force D3 to recalculate and update the line and text keys
-        dataGroup.forEach((d, i) => {
-            svg.select('.line' + i)
-                .attr('d', lineGen(d.values));
-            svg.select(".textKey" + i)
-                .attr("transform", "translate(" + xScale(d.values[d.values.length - 1][objX]) + "," + yScale(d.values[d.values.length - 1][objY]) + ")");
-
-            // Add the scatterplot
-            svg.selectAll(".circle")
-                .attr("cx", (d) => xScale(d[objX]))
-                .attr("cy", (d) => yScale(d[objY]))
-                .on("mouseover", function (this: any, d) {
-                    div.style("opacity", 1);
-                    div.html("<img src=\"" + d.image24 + "\">" + parseTime(d.msPass) + ":" + d.realName + ":" + d.text)
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-                })
-                .on("mouseout", (d) => {
-                    div.style("opacity", 0);
-                });
-        });
-
-        // Update the tick marks
-        xAxis.ticks(Math.max(width / 75, 2));
-        yAxis.ticks(Math.max(height / 50, 2));
-
-    };
-
-    // Call the resize function whenever a resize event occurs
-    d3.select(window).on('resize', resize);
-
-    // Call the resize function
-    resize();
 }
