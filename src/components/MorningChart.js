@@ -8,10 +8,11 @@ class MorningChart extends Component {
         this.props.getChart();
     }
     componentDidUpdate() {
+        if (typeof this.props.data === 'undefined') return;
         this.props.data.forEach((element) => {
             element.date = new Date(element.date);
         });
-        drawChart(this.props.data, 500);
+        drawChart(this.props.data, 500, this);
     }
     render() {
         return (
