@@ -13,10 +13,17 @@ export const drawChart = (data, heightUser, self) => {
     // format
     const timeFormat = '%H:%M';
 
+    // min-height
+    const minHeight = 200;
+
     // Margins
-    const margins = { top: 20, right: 80, bottom: 30, left: 50 };
+    const margins = { top: 50, right: 80, bottom: 30, left: 100 };
     let width = parseInt(d3.select("#chart").style("width")) - margins.left - margins.right;
-    let height = heightUser - margins.top - margins.bottom;
+    let height = width * 0.4 - margins.top - margins.bottom;
+
+    if (height < minHeight) {
+        height = minHeight;
+    }
 
     const svg: Selection<Element, {}, HTMLElement, any> = d3.select("#chart");
     svg.attr("height", height);
