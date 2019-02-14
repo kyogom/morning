@@ -1,4 +1,5 @@
 import axios from 'axios';
+import env from '../env/load-env';
 
 export const getChartSuccess = (data) => ({
     type: 'GET_CHART',
@@ -7,8 +8,8 @@ export const getChartSuccess = (data) => ({
 
 export const getChart = () => {
     return (dispatch) => {
-        // return axios.get('https://us-central1-morning-40d4c.cloudfunctions.net/api/morning')
-        return axios.get('http://localhost:5000/morning-40d4c/us-central1/api/morning')
+        console.log();
+        return axios.get(`${env.env.API_PATH}/api/morning`)
             .then(response => {
                 dispatch(getChartSuccess(response.data));
             });
