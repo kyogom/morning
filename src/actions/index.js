@@ -8,7 +8,6 @@ export const getChartSuccess = (data) => ({
 
 export const getChart = () => {
     return (dispatch) => {
-        console.log();
         return axios.get(`${env.env.API_PATH}/api/morning`)
             .then(response => {
                 dispatch(getChartSuccess(response.data));
