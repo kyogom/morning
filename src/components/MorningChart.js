@@ -16,7 +16,7 @@ class MorningChart extends Component {
     }
     render() {
         return (
-            <svg id="chart"></svg>
+            <svg id="chart" style={{ 'marginTop': 100 }}></svg>
         );
     }
 }

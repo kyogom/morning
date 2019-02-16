@@ -3,16 +3,16 @@ import { createMuiTheme } from '@material-ui/core/styles';
 export const theme = createMuiTheme({
     palette: {
         primary: {
-            main: '#eeeeee'
+            main: '#ffffff'
         },
         secondary: {
-            main: '#f44336'
+            main: '#dbdee0'
         },
     },
     typography: {
         useNextVariants: true
     },
-    shadows: Array(25).fill('none')
+    // shadows: Array(25).fill('none')
 });
 
 export default theme;
