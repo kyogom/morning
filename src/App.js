@@ -12,7 +12,9 @@ class App extends Component {
             <div className="App">
                 <MuiThemeProvider theme={theme}>
                     <Header />
-                    <GetChart />
+                    <main style={{ 'marginTop': 100, 'marginLeft': 60 }}>
+                        <GetChart />
+                    </main>
                     <Footer />
                 </MuiThemeProvider>
             </div>
