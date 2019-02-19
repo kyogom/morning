@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import theme from '../theme/theme';
 
@@ -25,7 +25,7 @@ function Footer(props) {
     return (
         <div className={classes.root}>
             <div>
-                <a href="https://goo.gl/forms/2BMMIepHqZB0ULk22" target="_blank" className={classes.links}>お問い合わせ</a>
+                <a href="https://goo.gl/forms/2BMMIepHqZB0ULk22" target="_blank" rel="noopener noreferrer" className={classes.links}>お問い合わせ</a>
                 <a href="#">プライバシーポリシー（作成中）</a>
             </div>
             <span className={classes.signature}>

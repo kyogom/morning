@@ -11,11 +11,10 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import TableChart from '@material-ui/icons/TableChart';
 import ShowChart from '@material-ui/icons/ShowChart';
 
-// import MenuIcon from '@material-ui/icons/Menu';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 const appBar = {
     height: 56
@@ -58,12 +57,12 @@ function Header(props) {
             </AppBar>
             <Drawer variant="permanent" classes={{ paper: classes.drawer }}>
                 <List className={classes.sidelist}>
-                    <ListItem button key={'lineChart'}>
+                    <ListItem component={Link} to="/" button key={'lineChart'}>
                         <ListItemIcon><ShowChart /></ListItemIcon>
                     </ListItem>
-                    {/* <ListItem button key={'table'}>
+                    <ListItem component={Link} to="/table" button key={'table'}>
                         <ListItemIcon><TableChart /></ListItemIcon>
-                    </ListItem> */}
+                    </ListItem>
                 </List>
             </Drawer>
         </div >
