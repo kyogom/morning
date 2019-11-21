@@ -114,7 +114,7 @@ export const drawChart = (data, heightUser, self) => {
             .on("mouseover", function (this: any, d) {
                 d3.selectAll('.tooltip').style('opacity', 0)
                 div.style("opacity", 1);
-                div.html("<img src=\"" + d.image24 + "\">" + parseTime(d.msPass) + ":" + d.realName + ":" + d.text)
+                div.html("<img src=\"" + d.image24 + "\">" + parseTime(d.msPass) + ":" + d.realName + ":<br>" + d.text)
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
                 self.props.updateSelectedUser(d.user);

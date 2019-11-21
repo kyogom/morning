@@ -60,16 +60,16 @@ exports.morning = {
                     'date': tsToDate(message.ts)
                 });
             });
+            return records;
+            // for DEMO
+            // const timeFiltered = records.filter((r) =>
+            //     (MORNING_HOUR_START + 24 - JP_TIME_ZONE) * 60 * 60 * 1000 <= r.msPass
+            //     &&
+            //     r.msPass <= (MORNING_HOUR_END + 24 - JP_TIME_ZONE) * 60 * 60 * 1000
+            // );
+            // const dateFiltered = filterByDateAndUser(timeFiltered);
 
-            const timeFiltered = records.filter((r) =>
-                (MORNING_HOUR_START + 24 - JP_TIME_ZONE) * 60 * 60 * 1000 <= r.msPass
-                &&
-                r.msPass <= (MORNING_HOUR_END + 24 - JP_TIME_ZONE) * 60 * 60 * 1000
-            );
-
-            const dateFiltered = filterByDateAndUser(timeFiltered);
-
-            return dateFiltered;
+            // return dateFiltered;
         })();
     }
 
