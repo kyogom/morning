@@ -35,7 +35,7 @@ export const drawChart = (data, heightUser, self) => {
     yScale.domain(d3.extent(data, (d) => +d[objY]));
     xScale.range([margins.left, width]);
     yScale.range([margins.top, height - margins.bottom]);
-    const xAxis: Axis<{}> = d3.axisBottom(xScale);
+    const xAxis: Axis<{}> = d3.axisBottom(xScale).tickValues(data.map(d=> d.date)).tickFormat(d3.timeFormat("%Y-%m-%d"));
     const yAxis: Axis<{}> = d3.axisLeft(yScale);
     const parseTime = d3.timeFormat(timeFormat);
 
